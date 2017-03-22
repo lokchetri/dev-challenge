@@ -53,7 +53,7 @@ exports.start = function(stompUrl) {
                 data.lastChangeAsk = ask - data.bestAsk
                 data.bestBid = bid
                 data.bestAsk = ask
-                    //Mock data just for testing sparkline
+                // Mock data just for testing sparkline
                 data.midPrice = []
                 for (let j = 0; j <= 5; j++) {
                     data.midPrice.push(Math.random() * 5);
