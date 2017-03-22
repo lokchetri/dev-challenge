@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <!--
     This is the library that provides websocket streaming pub/sub
@@ -7,40 +8,27 @@
     <script src="stomp.js"></script>
     <script src="sparkline.js"></script>
 </head>
+
 <body>
 
-<!-- This is a description of what you should do for this task.  You can remove it for your answer -->
-<section class="content">
-    <h1>Updating Table</h1>
-	<p>
-        This page is served from <code>dev-challenge/site/index.html</code>.  To get set up, go into the
-        dev-challenge directory and run <code>npm install</code>.  To start the server, run
-        <code>npm start</code>
-    </p>
-    <section id="stomp-status">
+    <!-- This is a description of what you should do for this task.  You can remove it for your answer -->
+    <section class="content">
+        <h1>Updating Table</h1>
+        <p>
+            This page is served from <code>dev-challenge/site/index.html</code>. To get set up, go into the dev-challenge directory and run <code>npm install</code>. To start the server, run
+            <code>npm start</code>
+        </p>
+        <section id="stomp-status">
+        </section>
+        <section>
+            <p> Mock data is used for sparkline. Please check server-publisher.js file.</p>
+            <div id="stomp-response"></div>
+        </section>
     </section>
-	<section>
-		<p> Mock data is used for sparkline. Please check server-publisher.js file.</p>
-		<h3>Task Accomplished </h3>
-		<ul class="task-list">
-			<li>Show those currency pairs in a table with rows for each currency pair which
-			includes columns for at least the name, the current best bid price, current best ask price,
-			the amount that the best bid last changed, and the amount the best ask price last changed.
-			This data can be read out of the price updates that are sent via stomp.
-			</li>
-			<li>The table should be sorted (and remain sorted) by the column that indicates how much the best bid price
-        last changed (lastChangeBid in the response data).
-			</li>
-			<li>
-			Mock data is used for drawing sparkline.
-			</li>
-		</ul>
-		<div id="stomp-response"></div>
-	</section>
-</section>
 
-<!-- Code you write in index.js and anything it depends on will be bundled into bundle.js and
+    <!-- Code you write in index.js and anything it depends on will be bundled into bundle.js and
      is included here -->
-<script src="bundle.js"></script>
+    <script src="bundle.js"></script>
 </body>
+
 </html>
