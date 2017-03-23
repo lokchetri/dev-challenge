@@ -81,3 +81,7 @@ ul.task-list > li:before {
 	  font-size: 25px;
 	  font-weight: bold;
 }
+.highlight
+{
+	background: #FFFDD0 !important;
+}
