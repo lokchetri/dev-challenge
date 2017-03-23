@@ -22,7 +22,7 @@ client.debug = function(msg) {
 }
 
 // Data initialization
-const currency = [
+const model = [
     { name: 'gbpusd', bestBid: 0, bestAsk: 0, lastChangeBid: 0 },
     { name: 'gbpeur', bestBid: 0, bestAsk: 0, lastChangeBid: 0 },
     { name: 'gbpaud', bestBid: 0, bestAsk: 0, lastChangeBid: 0 },
@@ -36,26 +36,25 @@ const currency = [
     { name: 'eurcad', bestBid: 0, bestAsk: 0, lastChangeBid: 0 },
     { name: 'gbpcad', bestBid: 0, bestAsk: 0, lastChangeBid: 0 }
 ];
+const tableId = 'table1';
 // Create table	
-Process.createTable(currency);
+Process.createTable(tableId, model);
 
 function connectCallback() {
     document.getElementById('stomp-status').innerHTML = "It has now successfully connected to a stomp server serving price updates for some foreign exchange currency pairs."
     client.subscribe('/fx/prices', function(message) {
         console.log("received message : " + message.body);
         var data = JSON.parse(message.body);
-        currency.forEach(item => {
-                if (item.name == data.name) {
-                    item.bestBid = data.bestBid;
-                    item.bestAsk = data.bestAsk;
-                    item.lastChangeBid = data.lastChangeBid;
-                    // Update row based on currency name
-                    Process.updateTableRow(data);
-                }
+        model.forEach(item => {
+			if (item.name === data.name) {
+				// Update row based on currency name
+				Process.updateTableRow(tableId, data);
+			}
         })
         // Sort table by 'Last Bid Price' column
-        Process.sortTable('table1', 3, 'asc');
+        Process.sortTable(tableId, 3, 'asc');
         // Once we get a message, the client disconnects
+		// To receive continuous stream, I am commenting it as of now.
         //client.disconnect();
     })
 }

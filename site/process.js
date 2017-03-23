@@ -1,10 +1,10 @@
 "use strict";
 //var exports = module.exports = {};
-exports.createTable = function (data) {
+exports.createTable = function (tableId, data) {
     var tableContainerDiv = document.getElementById("stomp-response");
     var table = document.createElement('table');
     table.border = '1';
-    table.id = 'table1';
+    table.id = tableId;
     // Create thead
     var thTitle = ['Currency', 'Current Best Bid Price', 'Current Best Ask Price', 'Last Bid Price', 'Sparkline'];
     var tableHead = document.createElement('thead');
@@ -51,8 +51,8 @@ exports.createTable = function (data) {
     tableContainerDiv.appendChild(table);
 }
 
-exports.updateTableRow = function(data) {
-    var table = document.getElementById('table1');
+exports.updateTableRow = function(tableId, data) {
+    var table = document.getElementById(tableId);
     var rows = table.rows;
     var r = 0;
     var rowFound = false;
@@ -73,31 +73,29 @@ exports.updateTableRow = function(data) {
 }
 
 exports.sortTable = function(tableId, columnIndex, order) {
-    var table, rows, switching, i, x, y, shouldSwitch, dir, switchCount = 0;
+    var table, rows, switching, i, x, y, shouldSwitch, switchCount = 0;
     table = document.getElementById(tableId);
     switching = true;
-    // Sorting direction
-    dir = order;
     // Make a loop that will continue until no switching has been done
     while (switching) {
         // Start by saying: no switching is done
         switching = false;
-        rows = table.getElementsByTagName("TR");
+        rows = table.getElementsByTagName("tr");
         // Loop through all table rows (except the first, which contains table headers)
         for (i = 1; i < (rows.length - 1); i++) {
             // Start by saying there should be no switching
             shouldSwitch = false;
             // Get the two elements you want to compare,one from current row and one from the next
-            x = rows[i].getElementsByTagName("TD")[columnIndex];
-            y = rows[i + 1].getElementsByTagName("TD")[columnIndex];
+            x = rows[i].getElementsByTagName("td")[columnIndex];
+            y = rows[i + 1].getElementsByTagName("td")[columnIndex];
             // Check if the two rows should switch place, based on the direction, asc or desc
-            if (dir == "asc") {
+            if (order == "asc") {
                 if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
                     // If so, mark as a switch and break the loop:
                     shouldSwitch = true;
                     break;
                 }
-            } else if (dir == "desc") {
+            } else if (order == "desc") {
                 if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
                     // If so, mark as a switch and break the loop:
                     shouldSwitch = true;
