@@ -12,7 +12,7 @@ require('./site/style.css')
 // Change this to get detailed logging from the stomp library
 global.DEBUG = false
 
-const Process = require('./site/process')
+const messageProcessor = require('./site/process')
 const url = "ws://localhost:8011/stomp"
 const client = Stomp.client(url)
 client.debug = function(msg) {
@@ -38,7 +38,7 @@ const model = [
 ];
 const tableId = 'table1';
 // Create table	
-Process.createTable(tableId, model);
+messageProcessor.createTable(tableId, model);
 
 function connectCallback() {
     document.getElementById('stomp-status').innerHTML = "It has now successfully connected to a stomp server serving price updates for some foreign exchange currency pairs."
@@ -48,11 +48,11 @@ function connectCallback() {
         model.forEach(item => {
 			if (item.name === data.name) {
 				// Update row based on currency name
-				Process.updateTableRow(tableId, data);
+				messageProcessor.updateTableRow(tableId, data);
 			}
         })
         // Sort table by 'Last Bid Price' column
-        Process.sortTable(tableId, 3, 'asc');
+        messageProcessor.sortTable(tableId, 3, 'asc');
         // Once we get a message, the client disconnects
 		// To receive continuous stream, I am commenting it as of now.
         //client.disconnect();

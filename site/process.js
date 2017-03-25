@@ -1,6 +1,10 @@
 "use strict";
-//var exports = module.exports = {};
-exports.createTable = function (tableId, data) {
+var messageProcessor = function (){
+	console.log('Testing');
+	this._stompClient = null;
+}
+
+messageProcessor.prototype.createTable = function (tableId, data) {
     var tableContainerDiv = document.getElementById("stomp-response");
     var table = document.createElement('table');
     table.border = '1';
@@ -51,7 +55,7 @@ exports.createTable = function (tableId, data) {
     tableContainerDiv.appendChild(table);
 }
 
-exports.updateTableRow = function(tableId, data) {
+messageProcessor.prototype.updateTableRow = function(tableId, data) {
     var table = document.getElementById(tableId);
     var rows = table.rows;
     var r = 0;
@@ -72,7 +76,7 @@ exports.updateTableRow = function(tableId, data) {
     }
 }
 
-exports.sortTable = function(tableId, columnIndex, order) {
+messageProcessor.prototype.sortTable = function(tableId, columnIndex, order) {
     var table, rows, switching, i, x, y, shouldSwitch, switchCount = 0;
     table = document.getElementById(tableId);
     switching = true;
@@ -112,3 +116,5 @@ exports.sortTable = function(tableId, columnIndex, order) {
         }
     }
 }
+
+module.exports = new messageProcessor();
