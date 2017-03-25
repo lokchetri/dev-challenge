@@ -1,9 +1,7 @@
 "use strict";
 var messageProcessor = function (){
-	console.log('Testing');
 	this._stompClient = null;
 }
-
 messageProcessor.prototype.createTable = function (tableId, data) {
     var tableContainerDiv = document.getElementById("stomp-response");
     var table = document.createElement('table');
@@ -116,5 +114,4 @@ messageProcessor.prototype.sortTable = function(tableId, columnIndex, order) {
         }
     }
 }
-
 module.exports = new messageProcessor();
